@@ -1,6 +1,6 @@
 import { flatMap, get, set } from 'lodash';
 
-import { REST } from 'core/api';
+import { REST } from '../api';
 import {
   IManagedApplicationSummary,
   IManagedResourceDiff,
@@ -8,7 +8,7 @@ import {
   IManagedResourceEventHistory,
   IManagedResourceEventHistoryResponse,
   ManagedResourceStatus,
-} from 'core/domain';
+} from '../domain';
 
 import { resourceManager } from './resources/resourceRegistry';
 import { sortEnvironments } from './utils/sortEnvironments';
@@ -86,8 +86,12 @@ export class ManagedReader {
     return REST('/managed/application').path(app).query({ entities: 'resources' }).get().then(this.decorateResources);
   }
 
-  public static getDeliveryConfig(app: string): PromiseLike<string> {
+  public static getProcessedDeliveryConfig(app: string): PromiseLike<string> {
     return REST('/managed/application').path(app).path('config').headers({ Accept: 'application/x-yaml' }).get();
+  }
+
+  public static getRawDeliveryConfig(app: string): PromiseLike<string> {
+    return REST('/managed/application').path(app).path('config', 'raw').headers({ Accept: 'application/x-yaml' }).get();
   }
 
   public static getEnvironmentsSummary(app: string): PromiseLike<IManagedApplicationSummary> {

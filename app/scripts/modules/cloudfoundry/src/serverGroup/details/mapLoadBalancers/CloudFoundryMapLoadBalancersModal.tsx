@@ -8,15 +8,15 @@ import {
   IServerGroup,
   IServerGroupJob,
   ModalClose,
-  NgReact,
   noop,
   ReactInjector,
   ReactModal,
   SpinFormik,
   TaskMonitor,
+  TaskMonitorWrapper,
 } from '@spinnaker/core';
-import { ICloudFoundryServerGroup } from 'cloudfoundry/domain';
-import { Routes } from 'cloudfoundry/presentation/forms/serverGroup';
+import { ICloudFoundryServerGroup } from '../../../domain';
+import { Routes } from '../../../presentation/forms/serverGroup';
 
 export interface ICloudFoundryLoadBalancerLinksModalProps extends IModalComponentProps {
   application: Application;
@@ -97,7 +97,6 @@ export class CloudFoundryMapLoadBalancersModal extends React.Component<
   public render() {
     const { serverGroup } = this.props;
     const { initialValues } = this.state;
-    const { TaskMonitorWrapper } = NgReact;
     return (
       <>
         <TaskMonitorWrapper monitor={this.state.taskMonitor} />

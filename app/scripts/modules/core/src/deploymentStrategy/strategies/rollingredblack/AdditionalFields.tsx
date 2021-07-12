@@ -1,12 +1,11 @@
 import { set } from 'lodash';
 import React from 'react';
 
-import { HelpField } from 'core/help/HelpField';
-import { NgReact } from 'core/reactShims';
-import { IServerGroupCommand } from 'core/serverGroup';
-
 import { PipelineSelector } from '../PipelineSelector';
 import { IDeploymentStrategyAdditionalFieldsProps } from '../../deploymentStrategy.registry';
+import { NumberList } from '../../../forms';
+import { HelpField } from '../../../help/HelpField';
+import { IServerGroupCommand } from '../../../serverGroup';
 
 export interface IRollingRedBlackCommand extends IServerGroupCommand {
   delayBeforeDisableSec: string;
@@ -52,7 +51,6 @@ export class AdditionalFields extends React.Component<IRollingRedBlackStrategyAd
   };
 
   public render() {
-    const { NumberList } = NgReact;
     const { command } = this.props;
     const rollbackOnFailure = command.rollback && command.rollback.onFailure;
     return (

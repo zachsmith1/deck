@@ -1,4 +1,3 @@
-import alias from '@rollup/plugin-alias';
 import fs from 'fs';
 import path from 'path';
 import copy from 'rollup-plugin-copy';
@@ -23,7 +22,7 @@ const fixTSPathRewrite = () => {
       const fixed = fs
         .readFileSync(dts)
         .toString()
-        .replace(/types="core\/types"/, 'types="./types"');
+        .replace(/types="types"/, 'types="./types"');
       fs.writeFileSync(dts, fixed);
     },
   };
@@ -33,9 +32,6 @@ export default {
   ...baseRollupConfig,
   plugins: [
     ...baseRollupConfig.plugins,
-    alias({
-      entries: [{ find: 'root', replacement: path.join(__dirname, '../../../../') }],
-    }),
     // `core` has some custom type declarations for `promise` and `svg` that needs to be bundled together in the
     // distribution. These custom type declarations are not automatically copied over by typescript, so needs to be
     // explicitly copied here.

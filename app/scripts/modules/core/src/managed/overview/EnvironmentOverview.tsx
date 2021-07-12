@@ -1,11 +1,10 @@
 import React from 'react';
 
-import { CollapsibleSection, ICollapsibleSectionProps, useApplicationContextSafe } from 'core/presentation';
-
 import { Resource } from './Resource';
 import { Artifact } from './artifact/Artifact';
 import { BaseEnvironment } from '../environmentBaseElements/BaseEnvironment';
 import { useFetchResourceStatusQuery } from '../graphql/graphql-sdk';
+import { CollapsibleSection, ICollapsibleSectionProps, useApplicationContextSafe } from '../../presentation';
 import { QueryEnvironment } from './types';
 
 const sectionProps: Partial<ICollapsibleSectionProps> = {
@@ -30,7 +29,7 @@ export const EnvironmentOverview = ({ environment }: IEnvironmentProps) => {
         {state.artifacts?.length ? (
           state.artifacts.map((artifact) => <Artifact key={artifact.reference} artifact={artifact} />)
         ) : (
-          <ErrorMessage>No artifacts found</ErrorMessage>
+          <NoItemsMessage>No artifacts found</NoItemsMessage>
         )}
       </CollapsibleSection>
       <CollapsibleSection
@@ -45,15 +44,15 @@ export const EnvironmentOverview = ({ environment }: IEnvironmentProps) => {
             <Resource key={resource.id} resource={resource} environment={environment.name} />
           ))
         ) : (
-          <ErrorMessage>No resources found</ErrorMessage>
+          <NoItemsMessage>No resources found</NoItemsMessage>
         )}
       </CollapsibleSection>
     </BaseEnvironment>
   );
 };
 
-const ErrorMessage: React.FC = ({ children }) => (
+const NoItemsMessage: React.FC = ({ children }) => (
   <div className="environment-row-element">
-    <div className="error-message">{children}</div>
+    <div className="no-items-message">{children}</div>
   </div>
 );

@@ -8,16 +8,16 @@ import {
   IModalComponentProps,
   IServerGroupJob,
   ModalClose,
-  NgReact,
   noop,
   ReactInjector,
   ReactModal,
   ReactSelectInput,
   SpinFormik,
   TaskMonitor,
+  TaskMonitorWrapper,
   TaskReason,
 } from '@spinnaker/core';
-import { ICloudFoundryServerGroup } from 'cloudfoundry/domain';
+import { ICloudFoundryServerGroup } from '../../../domain';
 
 export interface ICloudFoundryRollbackServerGroupModalProps extends IModalComponentProps {
   application: Application;
@@ -106,7 +106,6 @@ export class CloudFoundryRollbackServerGroupModal extends React.Component<
   public render() {
     const { allServerGroups, serverGroup } = this.props;
     const { initialValues } = this.state;
-    const { TaskMonitorWrapper } = NgReact;
     return (
       <>
         <TaskMonitorWrapper monitor={this.state.taskMonitor} />

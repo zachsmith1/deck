@@ -2,8 +2,8 @@ import { formatDistance } from 'date-fns';
 import { get, isNil } from 'lodash';
 import { $log } from 'ngimport';
 
-import { IOrchestratedItem, IOrchestratedItemVariable, ITask, ITaskStep } from 'core/domain';
-import { ReactInjector } from 'core/reactShims';
+import { IOrchestratedItem, IOrchestratedItemVariable, ITask, ITaskStep } from '../domain';
+import { ReactInjector } from '../reactShims';
 
 export class OrchestratedItemTransformer {
   public static addRunningTime(item: any): void {
@@ -48,10 +48,10 @@ export class OrchestratedItemTransformer {
 
       // Fallback to stage context if not found in variables
       const stages = item.execution?.stages;
-      if (stages && Array.isArray(stages)) {
+      if (stages && Array.isArray(stages) && stages.length > 0) {
         const maybeValue = (stages as any[])
           .map((stage) => stage.context && get(stage.context, key))
-          .reduce((prev, curr) => (OrchestratedItemTransformer.shouldReplace(prev, curr) ? curr : prev));
+          .reduce((prev, curr) => (OrchestratedItemTransformer.shouldReplace(prev, curr) ? curr : prev), null);
 
         if (!isNil(maybeValue) && maybeValue !== '') {
           // Memoize back into variables

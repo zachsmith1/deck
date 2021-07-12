@@ -1,4 +1,4 @@
-import { SETTINGS } from 'core/config/settings';
+import { SETTINGS } from '../config/settings';
 
 import { HelpContentsRegistry } from './helpContents.registry';
 
@@ -239,12 +239,16 @@ const helpContents: { [key: string]: string } = {
     '<p>Configures the cluster upon which this destroy operation will act. The <em>target</em> specifies what server group to resolve for the operation.</p>',
   'pipeline.config.jenkins.trigger.propertyFile':
     '<p>(Optional) Configures the name to the Jenkins artifact file used to pass in properties to later stages in the Spinnaker pipeline. The contents of this file will now be available as a map under the trigger and accessible via <em>trigger.properties</em>. See <a target="_blank" href="https://www.spinnaker.io/guides/user/pipeline-expressions/">Pipeline Expressions docs</a> for more information.</p>',
+  'pipeline.config.jenkins.trigger.payloadConstraints': `<p>(Optional, Requires Property File) When provided, only a build that contains a Property File with correct constraints will trigger this pipeline.  For example, you could restrict the trigger to certain branches by placing the branch name in your Property File and adding a constraint with a key like "branch" and value "master".</p>
+    <p>The constraint values may be supplied as regex.</p>`,
   'pipeline.config.jenkins.propertyFile':
     '<p>(Optional) Configures the name to the Jenkins artifact file used to pass in properties to later stages in the Spinnaker pipeline. The contents of this file will now be available as a map under the stage context. See <a target="_blank" href="https://www.spinnaker.io/guides/user/pipeline-expressions/">Pipeline Expressions docs</a> for more information.</p>',
   'pipeline.config.travis.job.isFiltered':
     '<p>Note that for performance reasons, not all jobs are displayed. Please use the search field to limit the number of jobs.</p>',
   'pipeline.config.travis.trigger.propertyFile':
     '<p>(Optional) Configures the name to the Travis artifact file used to pass in properties to later stages in the Spinnaker pipeline. The contents of this file will now be available as a map under the trigger and accessible via <em>trigger.properties</em>. See <a target="_blank" href="https://www.spinnaker.io/guides/user/pipeline-expressions/">Pipeline Expressions docs</a> for more information.</p>',
+  'pipeline.config.travis.trigger.payloadConstraints': `<p>(Optional, Requires Property File) When provided, only a build that contains a Property File with correct constraints will trigger this pipeline.  For example, you could restrict the trigger to certain branches by placing the branch name in your Property File and adding a constraint with a key like "branch" and value "master".</p>
+    <p>The constraint values may be supplied as regex.</p>`,
   'pipeline.config.travis.propertyFile':
     '<p>(Optional) Configures the name to the Travis artifact file used to pass in properties to later stages in the Spinnaker pipeline. The contents of this file will now be available as a map under the stage context. See <a target="_blank" href="https://www.spinnaker.io/guides/user/pipeline-expressions/">Pipeline Expressions docs</a> for more information.</p>',
   'pipeline.config.bake.skipRegionDetection': `
@@ -275,6 +279,10 @@ const helpContents: { [key: string]: string } = {
     '<p>(Optional) The name of a json file containing key/value pairs to add to the packer command.</p>',
   'pipeline.config.bake.extendedAttributes':
     '<p>(Optional) Any additional attributes that you want to pass onto rosco, which will be injected into your packer runtime variables.</p>',
+  'pipeline.config.cf.createservice.updatable':
+    '<p>If checked, this will try to update the existing service. If not, if the service exists this stage will succeed and not try to update.</p>',
+  'pipeline.config.cf.createservice.versioned':
+    '<p>If checked, this stage should always deploy a new service with an incremented version number (mysql-v001).</p>',
   'pipeline.config.manualJudgment.instructions':
     '<p>(Optional) Instructions are shown to the user when making a manual judgment.</p><p>May contain HTML.</p>',
   'pipeline.config.manualJudgment.propagateAuthentication': `
