@@ -14,7 +14,6 @@ import {
   IServerGroupJob,
   MinMaxDesiredChanges,
   ModalClose,
-  NgReact,
   noop,
   NumberInput,
   PlatformHealthOverride,
@@ -22,11 +21,12 @@ import {
   ReactModal,
   SpinFormik,
   TaskMonitor,
+  TaskMonitorWrapper,
   TaskReason,
   ValidationMessage,
 } from '@spinnaker/core';
-import { AwsModalFooter } from 'amazon/common';
-import { IAmazonServerGroup } from 'amazon/domain';
+import { AwsModalFooter } from '../../../common';
+import { IAmazonServerGroup } from '../../../domain';
 
 export interface IAmazonResizeServerGroupModalProps extends IModalComponentProps {
   application: Application;
@@ -396,7 +396,6 @@ export class AmazonResizeServerGroupModal extends React.Component<
   public render() {
     const { serverGroup } = this.props;
     const { advancedMode, initialValues, platformHealthOnlyShowOverride } = this.state;
-    const { TaskMonitorWrapper } = NgReact;
     return (
       <>
         <TaskMonitorWrapper monitor={this.state.taskMonitor} />

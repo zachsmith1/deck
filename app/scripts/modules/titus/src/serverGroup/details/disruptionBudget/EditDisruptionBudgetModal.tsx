@@ -6,17 +6,17 @@ import {
   IJob,
   IModalComponentProps,
   ModalClose,
-  NgReact,
   ReactModal,
   SpinFormik,
   SubmitButton,
   TaskExecutor,
   TaskMonitor,
+  TaskMonitorWrapper,
 } from '@spinnaker/core';
-import { ITitusServerGroup } from 'titus/domain';
 
 import { ITitusServerGroupCommand } from '../../configure/serverGroupConfiguration.service';
 import { JobDisruptionBudget } from '../../configure/wizard/pages/disruptionBudget/JobDisruptionBudget';
+import { ITitusServerGroup } from '../../../domain';
 
 export interface IEditDisruptionBudgetModalProps extends IModalComponentProps {
   application: Application;
@@ -51,7 +51,6 @@ export class EditDisruptionBudgetModal extends React.Component<IEditDisruptionBu
 
   public render() {
     const { application, command, dismissModal } = this.props;
-    const { TaskMonitorWrapper } = NgReact;
     const taskMonitor = new TaskMonitor({
       application,
       title: 'Updating Job Disruption Budget',

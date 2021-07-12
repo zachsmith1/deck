@@ -1,10 +1,10 @@
 import { UIView, useCurrentStateAndParams, useSref } from '@uirouter/react';
 import React from 'react';
 
-import { HorizontalTabs } from 'core/presentation/horizontalTabs/HorizontalTabs';
-
 import { EnvironmentsDirectionController } from './environmentBaseElements/EnvironmentsRender';
 import { Routes } from './managed.states';
+import { HorizontalTabs } from '../presentation/horizontalTabs/HorizontalTabs';
+import { setDebugMode } from './utils/debugMode';
 import { useLogEvent } from './utils/logging';
 
 import './Environments2.less';
@@ -66,7 +66,15 @@ const tabs = Object.entries(tabsInternal).map(([key, title]) => ({ title, path: 
 // TODO: this is a temporary name until we remove the old view
 export const Environments2 = () => {
   const logEvent = useLogEvent('EnvironmentsTab');
-  const { state } = useCurrentStateAndParams();
+  const { state, params } = useCurrentStateAndParams();
+
+  React.useEffect(() => {
+    if (params.md_debug === 'enabled') {
+      setDebugMode(true);
+    } else if (params.md_debug === 'disabled') {
+      setDebugMode(false);
+    }
+  }, [params]);
 
   return (
     <div className="vertical Environments2">

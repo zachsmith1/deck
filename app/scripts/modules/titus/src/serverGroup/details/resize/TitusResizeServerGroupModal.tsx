@@ -9,15 +9,15 @@ import {
   IModalComponentProps,
   MinMaxDesiredChanges,
   ModalClose,
-  NgReact,
   NumberInput,
   PlatformHealthOverride,
   ReactInjector,
   SpinFormik,
+  TaskMonitorWrapper,
   UserVerification,
   ValidationMessage,
 } from '@spinnaker/core';
-import { ITitusServerGroup } from 'titus/domain';
+import { ITitusServerGroup } from '../../../domain';
 
 import { useTaskMonitor } from './useTaskMonitor';
 
@@ -216,7 +216,6 @@ function validateResizeCommand(values: ITitusResizeServerGroupCommand) {
 }
 
 export function TitusResizeServerGroupModal(props: ITitusResizeServerGroupModalProps) {
-  const { TaskMonitorWrapper } = NgReact;
   const { serverGroup, application, dismissModal } = props;
 
   const initialAdvancedMode = useMemo(() => {
